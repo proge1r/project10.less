@@ -1,0 +1,128 @@
+@border: 10px;
+@height: 45vh;
+@width: 80vw;
+@padding: 0;
+@display-flex: flex;
+@align-center: center;
+@j-c-center: center;
+@over-f: hidden;
+@bg-color_left: red;  
+@bg-color_right: yellow;
+@j-c-start: start;
+@j-c-end: end;
+@text-color: white;
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+}
+/* 1+2+3 */
+.container-mixin {
+  display: @display-flex;/*1+2+3 */
+  align-items: @align-center;/*1+2+3 */
+  justify-content: @j-c-center;/*1+2+3 */
+  border: @border solid black;/*1+2+3 */
+  width: @width;/*1+2+3 */
+  height: 30%;
+  padding: @padding;/*1+2+3 */
+}
+.boxes-mixin {
+  display: @display-flex;/*1+2+3 */
+  border: @border solid black;/*1+2+3 */
+  overflow: @over-f;/*1+2+3 */
+  text-align: @align-center;/*1+2+3 */
+}
+/* 2+3 */
+.container-mixin2 {
+  flex-direction: column;/*2+3 */
+  gap: 5%;/*2+3 */
+  padding: 10px;/*2+3 */
+}
+.boxes-mixin2 {
+    height: 30%;/*2+3 */
+    width: 80%;/*2+3 */
+    font-size: 10vh;/*2+3 */
+    justify-content: center;/*2+3 */
+    height: 35%;/*2+3 */
+}
+.viewport {
+  height: 100vh;
+  width: 100vw;
+  display: @display-flex;
+  align-items: @align-center;
+  justify-content: @j-c-center;
+
+
+  @media (min-width: 1500px) {
+    .container {
+      .container-mixin;
+      gap: 20%;
+      height: 30vh;
+  
+      .box1, .box2 {
+        .boxes-mixin;
+        height: 50%;
+        width: 30%;
+        font-size: 12vh;
+      }
+  
+      .box1 {
+        background-color: @bg-color_left;
+        justify-content: @j-c-start;
+        color: @text-color;
+      }
+  
+      .box2 {
+        background-color: @bg-color_right;
+        justify-content: @j-c-end;
+      }
+    }
+  }
+  
+  @media (min-width: 701px) and (max-width: 1499px) {
+    .container {
+      .container-mixin;
+      .container-mixin2;
+      height: 30%;
+      .box1, .box2 {
+        .boxes-mixin;
+        .boxes-mixin2;
+      }
+  
+      .box1 {
+        background-color: @bg-color_left;
+        justify-content: @j-c-start;
+        color:@text-color;
+      }
+  
+      .box2 {
+        background-color: @bg-color_right;
+        justify-content: @j-c-end;
+      }
+    }
+  }
+  
+  @media (max-width: 700px) {
+    .container {
+      .container-mixin;
+      .container-mixin2;
+  
+      .box1, .box2 {
+        .boxes-mixin;
+        .boxes-mixin2;
+      }
+  
+      .box1 {
+        background-color: @bg-color_left;
+        color:@text-color;
+      }
+  
+      .box2 {
+        background-color: @bg-color_right;
+      }
+    }
+  }
+}
